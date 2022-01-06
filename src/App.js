@@ -1,5 +1,6 @@
 import './App.css';
-import Apicall from './Components/Apicall';
+import EightDayForecast from './Components/EightDayForecast';
+import DailyForecast from './Components/DailyForecast'
 import {toCelcius, toFahrenheit} from './Library/TempConverter';
 
 
@@ -7,7 +8,8 @@ import {toCelcius, toFahrenheit} from './Library/TempConverter';
 function App() {
   return (
     <div className="App">
-      <Apicall/>
+      <EightDayForecast/>
+      <DailyForecast/>
     </div>
   );
 }
