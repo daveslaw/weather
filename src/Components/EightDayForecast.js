@@ -1,5 +1,6 @@
-import {React, useState, useEffect} from "react";
+import {React, useState, useEffect, Image} from "react";
 import {toCelcius, toFahrenheit} from '../Library/TempConverter';
+
 
 
 
@@ -11,10 +12,9 @@ const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=-26.2023
 const [forecast, setForecast] = useState();
 const [showForecast, setShowForecast] = useState(false);
 
-const [icon, setIcon] = useState();
+const [showIcon, setShowIcon] = useState(false);
 const [iconArray, setIconArray] = useState([]);
 const [iconUrlArray, setIconUrlArray] = useState([]);;
-const [urlController, setUrlController] = useState(false);
 
 const fetchWeather = () => {
     fetch(oneCallUrl)
@@ -43,58 +43,46 @@ useEffect(() => {
     
     if (forecast) {
         for (let i = 0; i < forecast.daily.length; i++) {
-            setIconArray(iconArray.push(forecast.daily[i].weather[0].icon));
+            setIconArray(iconArray.push(forecast.daily[i].weather[0].icon));           
+            
+
         }
     }
-    
+    // setShowIcon(true)
     console.log(iconArray)
     
+    
+    
+   
+    
+    
+   
 }, [forecast])
 
-useEffect(() => {
-    if (forecast) {
-        for (let i = 0; i < iconArray.length; i++) {
-            setIconUrlArray(iconUrlArray.push(`http://openweathermap.org/img/wn/${iconArray[i]}@2x.png`));
-            
-        }
-    }
-    
-    if (iconUrlArray.length) {
-    setUrlController(true);
-    console.log(iconUrlArray)
-    }
-   
-})
 return ( 
-        <div className="forecast-container">
-            
-            {showForecast && forecast.daily.map((daily, index) => {
-            return (
-              <div key= {index} className="forecast-day">                
-                  <div >{daily.dt}</div>
-                  <div >{daily.sunrise}</div>
-                  {/* <img  src="http://openweathermap.org/img/wn/${icon}@2x.png"></img>     */}
-                
-              </div>
-            );
-          })}
+        <div>
+            <div className="forecast-container">                
+                {showForecast && forecast.daily.map((daily, index) => {
+                return (
+                    <div key= {index} className="forecast-day">                
+                        <div >{daily.weather[0].description}</div>
+                        <div >Max: {toCelcius(daily.temp.max)} &#xb0; C</div>
+                        <img  src={"http://openweathermap.org/img/wn/" + daily.weather[0].icon + "@2x.png"}></img>
+                                          
+                    </div>
+                    );
+                })}      
 
-          
-            
-            
-            
-            
-           
-            
-            
-            
-            
-            
-            
-            <div className="forecast-card">
-                {/* Maximum Temperature {toCelcius(forecast.main.temp_max)} */}
+               
             </div>
-            {urlController && <img src={iconUrlArray[1]}></img>}
+            
+
+            
+                    
+                    
+                
+
+            
         </div>
      );
 }
