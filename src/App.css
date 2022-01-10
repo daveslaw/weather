@@ -5,15 +5,23 @@
 .forecast-container{
   display:flex;
   flex-flow: row wrap;
+  padding: 1em 0;
  
   border: 1px solid red;
   justify-content: space-evenly;
 }
 
 .forecast-day {
-  border: 1px solid green;
+  border: 1px solid #B4CED9;
+  padding: 1em 1em;
+  background-color: #B4CED9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
+.forecast-day:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 
 .img {
   width: 100px;
@@ -21,5 +29,9 @@
 }
 
 .selected {
-  color: green;
+  color: blue;
+}
+
+.unselected {
+  cursor: pointer;
 }

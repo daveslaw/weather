@@ -12,8 +12,7 @@ const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${a
 const [forecast, setForecast] = useState();
 const [showForecast, setShowForecast] = useState(false);
 
-// const [icon, setIcon] = useState();
-// const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+
 
     function fetchWeather() {
         fetch(url)
@@ -40,15 +39,7 @@ useEffect(() => {
 return ( 
         <div >
             {showForecast && <div>Hello world</div>}
-            {/* {showForecast && forecast.daily.map((daily, index) => {
-            return (
-              <div key= {index} className="forecast-day">                
-                  <div >{daily.dt}</div>
-                  <div >{daily.sunrise}</div>                  
-                
-              </div>
-            );
-          })} */}
+            
             
             
             

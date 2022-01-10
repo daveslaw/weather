@@ -6,5 +6,9 @@ function toFahrenheit(kelvin) {
     return Math.round((kelvin - 273.15) * 9 / 5 + 32);
 }
 
-export {toFahrenheit, toCelcius};
+function capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export {toFahrenheit, toCelcius, capitalize};
 
