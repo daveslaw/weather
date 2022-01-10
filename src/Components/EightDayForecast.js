@@ -1,4 +1,4 @@
-import {React, useState, useEffect, Image} from "react";
+import {React, useState, useEffect} from "react";
 import {toCelcius, toFahrenheit} from '../Library/TempConverter';
 
 
@@ -11,10 +11,11 @@ const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=-26.2023
 
 const [forecast, setForecast] = useState();
 const [showForecast, setShowForecast] = useState(false);
+const [cSelected, setCSelected] = useState(true);
+const [fSelected, setFSelected] = useState(false);
 
-const [showIcon, setShowIcon] = useState(false);
-const [iconArray, setIconArray] = useState([]);
-const [iconUrlArray, setIconUrlArray] = useState([]);;
+
+
 
 const fetchWeather = () => {
     fetch(oneCallUrl)
@@ -39,25 +40,30 @@ useEffect(() => {
     }
 }, [forecast] )
 
-useEffect(() => {
-    
-    if (forecast) {
-        for (let i = 0; i < forecast.daily.length; i++) {
-            setIconArray(iconArray.push(forecast.daily[i].weather[0].icon));           
-            
 
-        }
-    }
-    // setShowIcon(true)
-    console.log(iconArray)
-    
-    
-    
-   
-    
-    
-   
-}, [forecast])
+const cSelector = () =>{    
+        setCSelected(true);
+        setFSelected(false);    
+}
+
+const fSelector = () =>{    
+    setFSelected(true);
+    setCSelected(false);    
+}
+//      
+
+// useEffect(() => {   
+//     if (forecast) {
+//         for (let i = 0; i < forecast.daily.length; i++) {
+//             setIconArray(iconArray.push(forecast.daily[i].weather[0].icon));           
+            
+//         }
+//     }
+//     // setShowIcon(true)
+//     console.log(iconArray)  
+// }, [forecast])
+
+
 
 return ( 
         <div>
@@ -66,8 +72,11 @@ return (
                 return (
                     <div key= {index} className="forecast-day">                
                         <div >{daily.weather[0].description}</div>
-                        <div >Max: {toCelcius(daily.temp.max)} &#xb0; C</div>
-                        <img  src={"http://openweathermap.org/img/wn/" + daily.weather[0].icon + "@2x.png"}></img>
+                        <div >Max: {toCelcius(daily.temp.max)} &#xb0; 
+                            <span   className={cSelected ? "selected" : null} onClick={cSelector}>C</span> | 
+                            <span   className={fSelected ? "selected" : null} onClick={fSelector}>F</span>
+                        </div>
+                        <img alt={index} src={"http://openweathermap.org/img/wn/" + daily.weather[0].icon + "@2x.png"}></img>
                                           
                     </div>
                     );
