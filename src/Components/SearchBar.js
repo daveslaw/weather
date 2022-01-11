@@ -19,7 +19,7 @@ function SearchBar() {
                 
                 appContext.setCity(data.name);
                 console.log(data)
-                // console.log("Latitude: " + lat);
+                setSearchInput("");
                 // console.log(data);
             }
         })

@@ -16,6 +16,8 @@ const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${appCon
 const [showForecast, setShowForecast] = useState(false);
 const [cSelected, setCSelected] = useState(true);
 const [fSelected, setFSelected] = useState(false);
+const [showDaily, setShowDaily] = useState(false);
+const [keys, setKeys] = useState();
 
 
 
@@ -57,16 +59,22 @@ const fSelector = () =>{
 
 }
 
+const toggleDaily = (index) =>{
+    console.log(index)
+    setKeys(index);
+    setShowDaily(true);
+}
+
 
 return ( 
         <div>
             <div className="forecast-container">                
                 {showForecast && appContext.weekly.daily.map((daily, index) => {
                 return (
-                    <div key= {index} className="forecast-day">                
+                    <>
+                    <div key= {index} id={index} className="forecast-day" onClick={() => toggleDaily(index)}>                
                         
                         <div>{moment.unix(daily.dt).format('dddd DD/MM')}</div>
-                        {/* <div>{moment.unix(daily.dt).format('DD.MM.YYYY')}</div> */}
                         <div >Max: {cSelected ? toCelcius(daily.temp.max) : toFahrenheit(daily.temp.max)} &#xb0; 
                             <span   className={cSelected ? "selected" : "unselected"} onClick={cSelector}> C</span> | 
                             <span   className={fSelected ? "selected" : "unselected"} onClick={fSelector}> F</span>
@@ -75,14 +83,20 @@ return (
                         <div >{capitalize(daily.weather[0].description)}</div>
                                           
                     </div>
+                    
+                    </>
                     );
                 })}      
-
+                
                
             </div>
             <div>{appContext.city}</div>
             {/* <div>{appContext.weekly.timezone}</div> */}
+            {showDaily && <div>
+                        <div>Max {toCelcius(appContext.weekly.daily[keys].temp.max)}</div>
+                        <div>Min {toCelcius(appContext.weekly.daily[keys].temp.min)}</div>
 
+            </div>}
             
                     
                     
