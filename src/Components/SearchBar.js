@@ -41,11 +41,12 @@ function SearchBar() {
                 onInput={handleSearchInput}
             >
             </input>
-            <button 
+            <div 
+                className="search-button"
                 onClick={searchFunction}
             >
                 Search
-            </button>
+            </div>
         </div>
     );
 }

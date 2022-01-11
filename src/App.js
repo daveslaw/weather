@@ -5,6 +5,7 @@ import SearchBar from './Components/SearchBar';
 // import {toCelcius, toFahrenheit} from './Library/TempConverter';
 import { AppContext } from './Context/AppContext';
 import {useState} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -28,8 +29,9 @@ function App() {
       setCity: setCity,
     }}>
       <div className="App">
-        <EightDayForecast/>
         <SearchBar/>
+        <EightDayForecast/>
+        
         {/* <DailyForecast/> */}
       </div>
     </AppContext.Provider>
