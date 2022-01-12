@@ -104,19 +104,32 @@ return (
                 
                
             </div>
-            <div>{appContext.city}</div>
+            {!showDaily && <div>{appContext.city}</div>}
             {showSpinner && <Spinner animation="grow" variant="secondary" />}
             {/* <div>{appContext.weekly.timezone}</div> */}
-            {showDaily && <div className="daily-detailed-card center-text">
-                            <div className="day-header">
-                                <span>{moment.unix(appContext.weekly.daily[keys].dt).format('dddd DD MMMM')}</span>
+            {showDaily && <div className="daily-detailed-card">
+                            <div className="day-header flex-row">
+                                <span>{moment.unix(appContext.weekly.daily[keys].dt).format('dddd DD MMMM, YYYY')}</span>
                                 <span>{appContext.city}</span>
                             </div>
-                            <div>Max {toCelcius(appContext.weekly.daily[keys].temp.max)}</div>
-                            <div>Min {toCelcius(appContext.weekly.daily[keys].temp.min)}</div>
-                            <div>Humidity {appContext.weekly.daily[keys].humidity}</div>
-                            <div>Sunrise {moment.unix(appContext.weekly.daily[keys].sunrise).format('h:mm:ss a')}</div>
-                            <div>Sunset {moment.unix(appContext.weekly.daily[keys].sunset).format('h:mm:ss a')}</div>
+                            <div id="body-container" className="flex-row body-container test-border1">
+                            <div className="temp-container">
+                                <div className="flex-column test-border1">
+                                    <div>Max: {cSelected ? toCelcius(appContext.weekly.daily[keys].temp.max) : toFahrenheit(appContext.weekly.daily[keys].temp.max)} &#xb0;</div>
+                                    <div>Min: {cSelected ? toCelcius(appContext.weekly.daily[keys].temp.min) : toFahrenheit(appContext.weekly.daily[keys].temp.min)} &#xb0;</div>
+
+                                </div>
+                                <div className="test-border1 cf-container">
+                                    <span className={cSelected ? "selected" : "unselected"} onClick={cSelector}>C</span> |
+                                    <span className={fSelected ? "selected" : "unselected"} onClick={fSelector}>F</span>
+                                </div>
+                            </div>                           
+                                <div id="other-info" className="test-border1 flex-column">
+                                    <div>Humidity {appContext.weekly.daily[keys].humidity}</div>
+                                    <div>Sunrise {moment.unix(appContext.weekly.daily[keys].sunrise).format('h:mm:ss a')}</div>
+                                    <div>Sunset {moment.unix(appContext.weekly.daily[keys].sunset).format('h:mm:ss a')}</div>
+                                </div>
+                            </div>
                             <img src={"http://openweathermap.org/img/wn/" + appContext.weekly.daily[keys].weather[0].icon + "@2x.png"}></img>
 
             </div>}
