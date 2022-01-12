@@ -82,11 +82,11 @@ const toggleDaily = (event, index) =>{
 
 return ( 
         <div className="wrapper">
-            <div className="forecast-container">                
+            <div className="forecast-container ">                
                 {showForecast && appContext.weekly.daily.map((daily, index) => {
                 return (
                     <>
-                    <div key= {daily.dt} id="forecast-day" className="forecast-day" onClick={(event) => toggleDaily(event, index)}>                
+                    <div key= {daily.dt} id="forecast-day" className="forecast-day  " onClick={(event) => toggleDaily(event, index)}>                
                         
                         <div>{moment.unix(daily.dt).format('ddd DD/MM')}</div>
                         <div >Max: {cSelected ? toCelcius(daily.temp.max) : toFahrenheit(daily.temp.max)} &#xb0; 
@@ -107,7 +107,7 @@ return (
             <div>{appContext.city}</div>
             {showSpinner && <Spinner animation="grow" variant="secondary" />}
             {/* <div>{appContext.weekly.timezone}</div> */}
-            {showDaily && <div className="daily-detailed-card">
+            {showDaily && <div className="daily-detailed-card center-text">
                         <div>{moment.unix(appContext.weekly.daily[keys].dt).format('dddd DD/MM')}</div>
                         <div>Max {toCelcius(appContext.weekly.daily[keys].temp.max)}</div>
                         <div>Min {toCelcius(appContext.weekly.daily[keys].temp.min)}</div>

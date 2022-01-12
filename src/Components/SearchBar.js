@@ -36,13 +36,14 @@ function SearchBar() {
     return (
         <div>
             <input
-                placeholder="Search city here"
+                placeholder="Search city here "
                 value={searchInput}
                 onInput={handleSearchInput}
+                className="center-text"
             >
             </input>
             <div 
-                className="search-button"
+                className="search-button center-text"
                 onClick={searchFunction}
             >
                 Search
