@@ -36,7 +36,8 @@ const fetchWeather = () => {
 }
 
 useEffect(() => {
-    fetchWeather();     
+    fetchWeather();       
+     
 }, [appContext.lat, appContext.long]);
 
 useEffect(() => {
