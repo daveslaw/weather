@@ -42,10 +42,10 @@ html, body {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.img {
+/* .img {
   width: 100px;
   border: 1px solid blue;
-}
+} */
 
 .selected {
   font-weight: bold;
@@ -94,16 +94,25 @@ html, body {
   flex-flow: column wrap;
 }
 
-.test-border1 {
+/* .test-border1 {
   border: 2px solid red;
-}
+} */
 
 .temp-container {
-  border: 2px solid blue;
+ 
   display: flex;
   flex-flow: row;
   align-items: center;
   font-size: 1.25rem;
+  
+}
+
+.body-info {
+  align-items: flex-end;
+}
+
+.min-max {
+  align-items: flex-start;
 }
 
 .cf-container {
@@ -112,6 +121,11 @@ html, body {
   align-items: center;
   
   justify-content: space-between;
+}
+
+.small-img {
+  width: 200px;
+  text-align: center;
 }
 
 
