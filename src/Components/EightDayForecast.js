@@ -88,7 +88,7 @@ return (
                     <>
                     <div key= {daily.dt} id="forecast-day" className="forecast-day  " onClick={(event) => toggleDaily(event, index)}>                
                         
-                        <div>{moment.unix(daily.dt).format('ddd DD/MM')}</div>
+                        <div className="day-header">{moment.unix(daily.dt).format('ddd DD/MM')}</div>
                         <div >Max: {cSelected ? toCelcius(daily.temp.max) : toFahrenheit(daily.temp.max)} &#xb0; 
                             <span id="cselector"  className={cSelected ? "selected" : "unselected"} onClick={cSelector}> C</span> | 
                             <span id="fselector"  className={fSelected ? "selected" : "unselected"} onClick={fSelector}> F</span>
@@ -108,13 +108,16 @@ return (
             {showSpinner && <Spinner animation="grow" variant="secondary" />}
             {/* <div>{appContext.weekly.timezone}</div> */}
             {showDaily && <div className="daily-detailed-card center-text">
-                        <div>{moment.unix(appContext.weekly.daily[keys].dt).format('dddd DD/MM')}</div>
-                        <div>Max {toCelcius(appContext.weekly.daily[keys].temp.max)}</div>
-                        <div>Min {toCelcius(appContext.weekly.daily[keys].temp.min)}</div>
-                        <div>Humidity {appContext.weekly.daily[keys].humidity}</div>
-                        <div>Sunrise {moment.unix(appContext.weekly.daily[keys].sunrise).format('h:mm:ss a')}</div>
-                        <div>Sunset {moment.unix(appContext.weekly.daily[keys].sunset).format('h:mm:ss a')}</div>
-                        <img src={"http://openweathermap.org/img/wn/" + appContext.weekly.daily[keys].weather[0].icon + "@2x.png"}></img>
+                            <div className="day-header">
+                                <span>{moment.unix(appContext.weekly.daily[keys].dt).format('dddd DD MMMM')}</span>
+                                <span>{appContext.city}</span>
+                            </div>
+                            <div>Max {toCelcius(appContext.weekly.daily[keys].temp.max)}</div>
+                            <div>Min {toCelcius(appContext.weekly.daily[keys].temp.min)}</div>
+                            <div>Humidity {appContext.weekly.daily[keys].humidity}</div>
+                            <div>Sunrise {moment.unix(appContext.weekly.daily[keys].sunrise).format('h:mm:ss a')}</div>
+                            <div>Sunset {moment.unix(appContext.weekly.daily[keys].sunset).format('h:mm:ss a')}</div>
+                            <img src={"http://openweathermap.org/img/wn/" + appContext.weekly.daily[keys].weather[0].icon + "@2x.png"}></img>
 
             </div>}
             

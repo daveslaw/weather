@@ -36,7 +36,7 @@ function SearchBar() {
     return (
         <div>
             <input
-                placeholder="Search city here "
+                placeholder="Search city here"
                 value={searchInput}
                 onInput={handleSearchInput}
                 className="center-text"
