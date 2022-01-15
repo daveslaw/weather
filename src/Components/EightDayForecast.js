@@ -11,7 +11,7 @@ function EightDayForecast () {
 const appContext = useContext(AppContext);
 
 const apiKey = `e19fc65c1da6ed28036f370e2cf8c5ce`;
-const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${appContext.lat}&lon=${appContext.long}&appid=${apiKey}`;
+const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${appContext.lat}&lon=${appContext.long}&units="metric"&appid=${apiKey}`;
 
 const [showForecast, setShowForecast] = useState(false);
 const [cSelected, setCSelected] = useState(true);
@@ -24,7 +24,9 @@ const [showSpinner, setShowSpinner] = useState(false);
 
 
 const fetchWeather = () => {
+    setShowSpinner(true)
     setShowDaily(false);
+    setTimeout(() => {
     fetch(oneCallUrl)
     .then((response) => response.json())
     .then(data => {        
@@ -33,6 +35,9 @@ const fetchWeather = () => {
     .catch((error) => {
         console.log(error);
     })
+    },500)    
+    
+    setShowSpinner(false);
 }
 
 useEffect(() => {
@@ -107,7 +112,6 @@ return (
             </div>
             {!showDaily && <div>{appContext.city}</div>}
             {showSpinner && <Spinner animation="grow" variant="secondary" />}
-            {/* <div>{appContext.weekly.timezone}</div> */}
             {showDaily && <div className="daily-detailed-card">
                             <div className="day-header flex-row">
                                 <span>{moment.unix(appContext.weekly.daily[keys].dt).format('dddd DD MMMM, YYYY')}</span>
@@ -116,19 +120,19 @@ return (
                             <div id="body-container" className="flex-row body-container test-border1">
                             <div className="temp-container">
                                 <div className="flex-column min-max test-border1">
-                                    <div>Max: {cSelected ? toCelcius(appContext.weekly.daily[keys].temp.max) : toFahrenheit(appContext.weekly.daily[keys].temp.max)} </div>
-                                    <div>Min: {cSelected ? toCelcius(appContext.weekly.daily[keys].temp.min) : toFahrenheit(appContext.weekly.daily[keys].temp.min)} </div>
+                                    <div>Max: {cSelected ? toCelcius(appContext.weekly.daily[keys].temp.max) : toFahrenheit(appContext.weekly.daily[keys].temp.max)}&#xb0;</div>
+                                    <div>Min: {cSelected ? toCelcius(appContext.weekly.daily[keys].temp.min) : toFahrenheit(appContext.weekly.daily[keys].temp.min)}&#xb0;</div>
 
                                 </div>
-                                <div className="test-border1 cf-container">&#xb0;
+                                <div className="test-border1 cf-container">
                                     <span className={cSelected ? "selected" : "unselected"} onClick={cSelector}>C</span> |
                                     <span className={fSelected ? "selected" : "unselected"} onClick={fSelector}>F</span>
                                 </div>
                             </div>                           
                                 <div id="body-info" className="test-border1 body-info flex-column">
-                                    <div>Humidity {appContext.weekly.daily[keys].humidity}</div>
-                                    <div>Sunrise {moment.unix(appContext.weekly.daily[keys].sunrise).format('h:mm:ss a')}</div>
-                                    <div>Sunset {moment.unix(appContext.weekly.daily[keys].sunset).format('h:mm:ss a')}</div>
+                                    <div>Humidity: {appContext.weekly.daily[keys].humidity}%</div>
+                                    <div>Wind: {appContext.weekly.daily[keys].wind_speed} km/h</div>
+                                    <div>Rain: {appContext.weekly.daily[keys].wind_speed} mm</div>
                                 </div>
                             </div>
                             <div>
