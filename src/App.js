@@ -1,10 +1,9 @@
 import './App.css';
 import EightDayForecast from './Components/EightDayForecast';
-import DailyForecast from './Components/DailyForecast'
 import SearchBar from './Components/SearchBar';
 // import {toCelcius, toFahrenheit} from './Library/TempConverter';
 import { AppContext } from './Context/AppContext';
-import {useState} from 'react';
+import {React, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -32,7 +31,7 @@ function App() {
         <SearchBar/>
         <EightDayForecast/>
         
-        {/* <DailyForecast/> */}
+        
       </div>
     </AppContext.Provider>
   );
